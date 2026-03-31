@@ -1,9 +1,5 @@
 package icalendar
 
-import (
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
-)
-
 // New creates a calendar with the mandatory RFC 5545 defaults.
 func New() *VCalendar {
 	return &VCalendar{
@@ -23,7 +19,7 @@ func (cal *VCalendar) SetProdid(prodid string) *VCalendar {
 }
 
 func (cal *VCalendar) SetMethod(method string) *VCalendar {
-	cal.METHOD = parsehelper.StrPtr(method)
+	cal.METHOD = &method
 	return cal
 }
 

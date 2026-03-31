@@ -78,14 +78,21 @@ func (ev *VEvent) ProcessProperty(prop parse.Property) error {
 		if ev.PRIORITY != nil {
 			return fmt.Errorf("%w: PRIORITY", parsehelper.ErrDuplicateProperty)
 		}
-		ev.PRIORITY = parsehelper.IntPtr(prop.Value)
+		pri, err := parsehelper.IntPtr(prop.Value)
+		if err != nil {
+			return fmt.Errorf("invalid PRIORITY: %w", err)
+		}
+		ev.PRIORITY = pri
 
 	case "SEQUENCE":
 		if ev.SEQUENCE != nil {
 			return fmt.Errorf("%w: SEQUENCE", parsehelper.ErrDuplicateProperty)
 		}
-		ev.SEQUENCE = parsehelper.IntPtr(prop.Value)
-
+		seq, err := parsehelper.IntPtr(prop.Value)
+		if err != nil {
+			return fmt.Errorf("invalid SEQUENCE: %w", err)
+		}
+		ev.SEQUENCE = seq
 	/* OPTIONAL: SHOULD NOT occur more than once*/
 	case "RRULE":
 		if ev.RRULE != nil {
@@ -100,7 +107,7 @@ func (ev *VEvent) ProcessProperty(prop parse.Property) error {
 		}
 		ev.DTEND = itimePtr(ParseITIME(prop.Params, prop.Value))
 
-	//case "DURATION":
+	// case "DURATION":
 	// unimplemented
 
 	/* OPTIONAL: MAY occur more than once*/

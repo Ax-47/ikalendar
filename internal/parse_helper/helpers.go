@@ -6,12 +6,12 @@ import (
 )
 
 func StrPtr(s string) *string { return &s }
-func IntPtr(s string) *int {
+func IntPtr(s string) (*int, error) {
 	i, err := strconv.Atoi(s)
 	if err != nil {
-		return nil
+		return nil, err
 	}
-	return &i
+	return &i, nil
 }
 
 var (
