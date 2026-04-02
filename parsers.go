@@ -4,15 +4,19 @@ import (
 	"errors"
 	"io"
 
-	"github.com/minoplhy/ikalendar/internal/icalendar"
+	"github.com/minoplhy/ikalendar/internal/icalendar/encode"
+	"github.com/minoplhy/ikalendar/internal/icalendar/models"
+	"github.com/minoplhy/ikalendar/internal/icalendar/registry"
 	"github.com/minoplhy/ikalendar/internal/parse"
 )
 
-func ParseCalendar(r io.Reader) (*icalendar.VCalendar, error) {
+var Marshal = encode.Marshal
+
+func ParseCalendar(r io.Reader) (*models.VCalendar, error) {
 	engine := parse.NewEngine()
 
 	// Automatically register every component supports
-	for name, factory := range icalendar.CalendarComponents {
+	for name, factory := range registry.CalendarComponents {
 		engine.Register(name, factory)
 	}
 
@@ -22,7 +26,7 @@ func ParseCalendar(r io.Reader) (*icalendar.VCalendar, error) {
 		return nil, err
 	}
 
-	calendar, ok := rootComp.(*icalendar.VCalendar)
+	calendar, ok := rootComp.(*models.VCalendar)
 	if !ok {
 		return nil, errors.New("icalendar: parsed root component was not a VCALENDAR")
 	}

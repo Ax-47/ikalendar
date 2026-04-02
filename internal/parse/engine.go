@@ -2,22 +2,21 @@ package parse
 
 import "errors"
 
-func (e *Engine) Register(name string, registrant func() IComponent) {
+func (e *Engine) Register(name string, registrant ComponentFactory) {
 	e.registry[name] = registrant
 }
 
 func NewEngine() *Engine {
 	return &Engine{
-		registry: make(map[string]func() IComponent),
+		registry: make(registryMap),
 	}
 }
 
 var ErrNoRootComponent = errors.New("parse: no root component found in stream")
 
-// Run takes input Parser and builds the Component tree
-func (e *Engine) Run(parser *Parser) (IComponent, error) {
-	var root IComponent
-	var stack []IComponent
+func (e *Engine) Run(parser *Parser) (Component, error) {
+	var root Component
+	var stack []Component
 	var ignoreDepth int // Tracks nested levels of unsupported components
 
 	for {

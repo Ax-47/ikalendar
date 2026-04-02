@@ -1,28 +1,25 @@
 package ikalendar
 
 import (
-	"strings"
-
-	"github.com/minoplhy/ikalendar/internal/icalendar"
+	"github.com/minoplhy/ikalendar/internal/icalendar/builders"
 )
 
-func New() *icalendar.VCalendar {
-	return icalendar.New()
-}
+// CalendarOption configures a Calendar
+type CalendarOption = builders.VcalendarOption
 
-func NewEvent() *icalendar.VEvent {
-	return icalendar.NewEvent()
-}
+// New creates a new Calendar with RFC 5545 defaults
+//
+//	cal, err := ikalendar.New(
+//	    ikalendar.WithProdID("-//MyApp//EN"),
+//	    ikalendar.WithEvent(ev),
+//	)
 
-func Marshal(cal *icalendar.VCalendar) ([]byte, error) {
-	var sb strings.Builder
-
-	ctx := &icalendar.EncodeContext{
-		Builder:  &sb,
-		Calendar: cal,
-	}
-
-	cal.Encode(ctx)
-
-	return []byte(sb.String()), nil
-}
+// Re-export calendar options
+var (
+	NewCalendar  = builders.NewCalendar
+	WithProdID   = builders.WithProdID
+	WithVersion  = builders.WithVersion
+	WithMethod   = builders.WithMethod
+	WithCalScale = builders.WithCalScale
+	WithEvent    = builders.WithEvent
+)

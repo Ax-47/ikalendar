@@ -1,4 +1,4 @@
-package icalendar
+package models
 
 import (
 	"strings"
@@ -11,7 +11,18 @@ const (
 	iCalDateFormat     = "20060102"
 )
 
-func itimePtr(it ITIME) *ITIME { return &it }
+type ITIME struct {
+	// holds things like TZID or VALUE.
+	// {"TZID": "America/New_York"}
+	Parameters map[string]string
+
+	Time time.Time
+
+	// IsDateOnly is a helper flag. If true, the property had VALUE=DATE
+	// making it all-day event
+	IsDateOnly bool
+}
+type ITIMEOption func(*ITIME)
 
 func ParseITIME(params map[string]string, value string) ITIME {
 	it := ITIME{
@@ -70,25 +81,33 @@ func NewITIMEUTC(t time.Time) ITIME {
 	}
 }
 
-func NewITIMELocal(t time.Time) ITIME {
-	params := make(map[string]string)
-	loc := t.Location()
-
-	if loc != nil && loc.String() != "UTC" && loc.String() != "Local" {
-		params["TZID"] = loc.String()
-	}
-
-	return ITIME{
-		Parameters: params,
-		Time:       t,
-		IsDateOnly: false,
+func WithTZID(tzid string) ITIMEOption {
+	return func(it *ITIME) {
+		it.Parameters["TZID"] = tzid
 	}
 }
 
-func NewITIMEDate(t time.Time) ITIME {
-	return ITIME{
-		Parameters: map[string]string{"VALUE": "DATE"},
-		Time:       t,
-		IsDateOnly: true,
+func WithDateOnly() ITIMEOption {
+	return func(it *ITIME) {
+		it.IsDateOnly = true
+		it.Parameters["VALUE"] = "DATE"
 	}
+}
+
+func WithParam(key, value string) ITIMEOption {
+	return func(it *ITIME) {
+		it.Parameters[key] = value
+	}
+}
+
+func NewITIME(t time.Time, opts ...ITIMEOption) ITIME {
+	it := ITIME{
+		Parameters: make(map[string]string),
+		Time:       t,
+		IsDateOnly: false,
+	}
+	for _, opt := range opts {
+		opt(&it)
+	}
+	return it
 }

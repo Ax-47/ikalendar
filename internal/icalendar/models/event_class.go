@@ -1,4 +1,4 @@
-package icalendar
+package models
 
 type EventClass string
 
