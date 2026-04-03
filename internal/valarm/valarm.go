@@ -8,6 +8,13 @@ import (
 	"github.com/minoplhy/ikalendar/internal/share"
 )
 
+const (
+	propAction      share.PropertyName = "ACTION"
+	propTrigger     share.PropertyName = "TRIGGER"
+	propDescription share.PropertyName = "DESCRIPTION"
+	propSummary     share.PropertyName = "SUMMARY"
+)
+
 type VAlarm struct {
 	Action      *string
 	Trigger     *share.DURATION

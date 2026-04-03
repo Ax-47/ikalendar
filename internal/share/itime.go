@@ -24,6 +24,10 @@ type ITIME struct {
 }
 type ITIMEOption func(*ITIME)
 
+func (it ITIME) IsZero() bool {
+	return it.Time.IsZero() && !it.IsDateOnly && len(it.Parameters) == 0
+}
+
 func ParseITIME(params map[string]string, value string) ITIME {
 	it := ITIME{
 		Parameters: params,

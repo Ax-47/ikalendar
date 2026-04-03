@@ -10,75 +10,46 @@ import (
 // ── Required ──────────────────────────────────────────────────────────────────
 
 func (ev *VEvent) SetUID(uid string) error {
-	if ev.UID != "" {
-		return fmt.Errorf("%w: UID", parsehelper.ErrDuplicateProperty)
-	}
-	ev.UID = uid
-	return nil
+	return parsehelper.SetOnceValue(&ev.UID, uid, string(PropUID))
 }
 
 func (ev *VEvent) SetDTSTAMP(it share.ITIME) error {
-	if !ev.DTSTAMP.Time.IsZero() {
-		return fmt.Errorf("%w: DTSTAMP", parsehelper.ErrDuplicateProperty)
-	}
-	ev.DTSTAMP = it
-	return nil
+	return parsehelper.SetOnceITIME(&ev.DTSTAMP, it, string(PropDTSTAMP))
 }
 
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (ev *VEvent) SetDTSTART(it share.ITIME) error {
-	if ev.DTSTART != nil {
-		return fmt.Errorf("%w: DTSTART", parsehelper.ErrDuplicateProperty)
-	}
-	ev.DTSTART = &it
-	return nil
+	return parsehelper.SetOnce(&ev.DTSTART, parsehelper.Ptr(it), string(PropDTSTART))
 }
 
 func (ev *VEvent) SetDTEND(it share.ITIME) error {
-	if ev.DTEND != nil {
-		return fmt.Errorf("%w: DTEND", parsehelper.ErrDuplicateProperty)
-	}
 	if ev.DURATION != nil {
 		return fmt.Errorf("%w: DTEND and DURATION", parsehelper.ErrMutuallyExclusive)
 	}
-	ev.DTEND = &it
-	return nil
+	return parsehelper.SetOnce(&ev.DTEND, parsehelper.Ptr(it), string(PropDTEND))
 }
 
 func (ev *VEvent) SetDuration(d share.DURATION) error {
-	if ev.DURATION != nil {
-		return fmt.Errorf("%w: DURATION", parsehelper.ErrDuplicateProperty)
-	}
 	if ev.DTEND != nil {
 		return fmt.Errorf("%w: DURATION and DTEND", parsehelper.ErrMutuallyExclusive)
 	}
-	ev.DURATION = &d
-	return nil
+	return parsehelper.SetOnce(&ev.DURATION, parsehelper.Ptr(d), string(PropDURATION))
 }
 
 func (ev *VEvent) SetCreated(it share.ITIME) error {
 	if ev.CREATED != nil {
 		return fmt.Errorf("%w: CREATED", parsehelper.ErrDuplicateProperty)
 	}
-	ev.CREATED = &it
-	return nil
+	return parsehelper.SetOnce(&ev.CREATED, parsehelper.Ptr(it), string(PropCREATED))
 }
 
 func (ev *VEvent) SetLastModified(it share.ITIME) error {
-	if ev.LASTMODIFIED != nil {
-		return fmt.Errorf("%w: LAST-MODIFIED", parsehelper.ErrDuplicateProperty)
-	}
-	ev.LASTMODIFIED = &it
-	return nil
+	return parsehelper.SetOnce(&ev.LASTMODIFIED, parsehelper.Ptr(it), string(PropLASTMODIFIED))
 }
 
 func (ev *VEvent) SetRRule(r share.RECUR) error {
-	if ev.RRULE != nil {
-		return fmt.Errorf("%w: RRULE", parsehelper.ErrDuplicateProperty)
-	}
-	ev.RRULE = &r
-	return nil
+	return parsehelper.SetOnce(&ev.RRULE, parsehelper.Ptr(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────

@@ -5,6 +5,7 @@ import (
 
 	"github.com/minoplhy/ikalendar/internal/componants"
 	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
+	"github.com/minoplhy/ikalendar/internal/share"
 	"github.com/minoplhy/ikalendar/internal/vevent"
 )
 
@@ -19,25 +20,25 @@ type VCalendar struct {
 }
 
 const (
-	calPropPRODID   = "PRODID"
-	calPropVERSION  = "VERSION"
-	calPropCALSCALE = "CALSCALE"
-	calPropMETHOD   = "METHOD"
+	PropPRODID   share.PropertyName = "PRODID"
+	PropVERSION  share.PropertyName = "VERSION"
+	PropCALSCALE share.PropertyName = "CALSCALE"
+	PropMETHOD   share.PropertyName = "METHOD"
 )
 
-func (c *VCalendar) GetMethod() *string {
-	return c.METHOD
+func (cal *VCalendar) GetMethod() *string {
+	return cal.METHOD
 }
 
 func (cal *VCalendar) ProcessProperty(prop componants.Property) error {
-	switch prop.Name {
-	case calPropPRODID:
+	switch share.PropertyName(prop.Name) {
+	case PropPRODID:
 		return cal.SetPRODID(prop.Value)
-	case calPropVERSION:
+	case PropVERSION:
 		return cal.SetVERSION(prop.Value)
-	case calPropCALSCALE:
+	case PropCALSCALE:
 		return cal.SetCALSCALE(prop.Value)
-	case calPropMETHOD:
+	case PropMETHOD:
 		return cal.SetMETHOD(prop.Value)
 	}
 	return nil

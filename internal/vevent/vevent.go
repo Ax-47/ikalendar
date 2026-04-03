@@ -57,7 +57,7 @@ type VEvent struct {
 }
 
 func (ev *VEvent) ProcessProperty(prop componants.Property) error {
-	name := PropertyName(prop.Name)
+	name := share.PropertyName(prop.Name)
 	if handler, ok := veventHandlers[name]; ok {
 		return handler(ev, prop)
 	}

@@ -11,47 +11,43 @@ import (
 
 type EventHandler func(*VEvent, componants.Property) error
 
-type (
-	PropertyName string
-)
-
 const (
 	// Required
-	PropUID     PropertyName = "UID"
-	PropDTSTAMP PropertyName = "DTSTAMP"
-	PropDTSTART PropertyName = "DTSTART"
+	PropUID     share.PropertyName = "UID"
+	PropDTSTAMP share.PropertyName = "DTSTAMP"
+	PropDTSTART share.PropertyName = "DTSTART"
 
 	// Optional single
-	PropDTEND        PropertyName = "DTEND"
-	PropDURATION     PropertyName = "DURATION"
-	PropCLASS        PropertyName = "CLASS"
-	PropCREATED      PropertyName = "CREATED"
-	PropDESCRIPTION  PropertyName = "DESCRIPTION"
-	PropGEO          PropertyName = "GEO"
-	PropLASTMODIFIED PropertyName = "LAST-MODIFIED"
-	PropLOCATION     PropertyName = "LOCATION"
-	PropORGANIZER    PropertyName = "ORGANIZER"
-	PropPRIORITY     PropertyName = "PRIORITY"
-	PropSEQUENCE     PropertyName = "SEQUENCE"
-	PropSTATUS       PropertyName = "STATUS"
-	PropSUMMARY      PropertyName = "SUMMARY"
-	PropTRANSP       PropertyName = "TRANSP"
-	PropURL          PropertyName = "URL"
-	PropRRULE        PropertyName = "RRULE"
+	PropDTEND        share.PropertyName = "DTEND"
+	PropDURATION     share.PropertyName = "DURATION"
+	PropCLASS        share.PropertyName = "CLASS"
+	PropCREATED      share.PropertyName = "CREATED"
+	PropDESCRIPTION  share.PropertyName = "DESCRIPTION"
+	PropGEO          share.PropertyName = "GEO"
+	PropLASTMODIFIED share.PropertyName = "LAST-MODIFIED"
+	PropLOCATION     share.PropertyName = "LOCATION"
+	PropORGANIZER    share.PropertyName = "ORGANIZER"
+	PropPRIORITY     share.PropertyName = "PRIORITY"
+	PropSEQUENCE     share.PropertyName = "SEQUENCE"
+	PropSTATUS       share.PropertyName = "STATUS"
+	PropSUMMARY      share.PropertyName = "SUMMARY"
+	PropTRANSP       share.PropertyName = "TRANSP"
+	PropURL          share.PropertyName = "URL"
+	PropRRULE        share.PropertyName = "RRULE"
 
 	// Optional multi
-	PropATTACH        PropertyName = "ATTACH"
-	PropATTENDEE      PropertyName = "ATTENDEE"
-	PropCATEGORIES    PropertyName = "CATEGORIES"
-	PropCOMMENT       PropertyName = "COMMENT"
-	PropCONTACT       PropertyName = "CONTACT"
-	PropEXDATE        PropertyName = "EXDATE"
-	PropREQUESTSTATUS PropertyName = "REQUEST-STATUS"
-	PropRELATED       PropertyName = "RELATED-TO"
-	PropRDATE         PropertyName = "RDATE"
-	PropRESOURCES     PropertyName = "RESOURCES"
+	PropATTACH        share.PropertyName = "ATTACH"
+	PropATTENDEE      share.PropertyName = "ATTENDEE"
+	PropCATEGORIES    share.PropertyName = "CATEGORIES"
+	PropCOMMENT       share.PropertyName = "COMMENT"
+	PropCONTACT       share.PropertyName = "CONTACT"
+	PropEXDATE        share.PropertyName = "EXDATE"
+	PropREQUESTSTATUS share.PropertyName = "REQUEST-STATUS"
+	PropRELATED       share.PropertyName = "RELATED-TO"
+	PropRDATE         share.PropertyName = "RDATE"
+	PropRESOURCES     share.PropertyName = "RESOURCES"
 ) // RFC 5545 §3.3.6
-var veventHandlers = map[PropertyName]EventHandler{
+var veventHandlers = map[share.PropertyName]EventHandler{
 	PropUID:           handleUID,
 	PropDTSTAMP:       handleDTSTAMP,
 	PropDTSTART:       handleDTSTART,
