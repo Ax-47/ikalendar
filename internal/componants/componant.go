@@ -1,5 +1,13 @@
 package componants
 
+type ComponentName string
+
+const (
+	ComponentVCalendar ComponentName = "VCALENDAR"
+	ComponentVEvent    ComponentName = "VEVENT"
+	ComponentVAlarm    ComponentName = "VALARM"
+)
+
 type (
 	Validalbe interface{ Validate() error }
 )

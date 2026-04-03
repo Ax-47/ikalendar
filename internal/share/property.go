@@ -4,14 +4,6 @@ type (
 	PropertyName string
 )
 
-type ComponentName string
-
-const (
-	ComponentVCalendar ComponentName = "VCALENDAR"
-	ComponentVEvent    ComponentName = "VEVENT"
-	ComponentVAlarm    ComponentName = "VALARM"
-)
-
 type RELATED struct {
 	UID     string
 	RelType *string // PARENT / CHILD / SIBLING
