@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minoplhy/ikalendar"
+	ikalendar "github.com/minoplhy/ikalendar/pkg"
 )
 
 func TestParseCalendar(t *testing.T) {
