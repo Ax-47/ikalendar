@@ -8,10 +8,12 @@ const (
 	ComponentVAlarm    ComponentName = "VALARM"
 	ComponentVJournal  ComponentName = "VJOURNAL"
 	ComponentVTodo     ComponentName = "VTODO"
+	ComponentVTimezone ComponentName = "VTIMEZONE"
 )
 
 type (
-	Validalbe interface{ Validate() error }
+	RegistryMap map[ComponentName]ComponentFactory
+	Validalbe   interface{ Validate() error }
 )
 
 type Component interface {

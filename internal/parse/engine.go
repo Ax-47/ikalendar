@@ -6,13 +6,13 @@ import (
 	"github.com/minoplhy/ikalendar/internal/componants"
 )
 
-func (e *Engine) Register(name string, registrant componants.ComponentFactory) {
+func (e *Engine) Register(name componants.ComponentName, registrant componants.ComponentFactory) {
 	e.registry[name] = registrant
 }
 
 func NewEngine() *Engine {
 	return &Engine{
-		registry: make(registryMap),
+		registry: make(componants.RegistryMap),
 	}
 }
 
@@ -49,7 +49,7 @@ func (e *Engine) Run(parser *Parser) (componants.Component, error) {
 
 		switch prop.Name {
 		case "BEGIN":
-			factory, exists := e.registry[prop.Value]
+			factory, exists := e.registry[componants.ComponentName(prop.Value)]
 			if !exists {
 				// invalid or We don't support this component
 				// Tell the parser to ignore everything until the END tag

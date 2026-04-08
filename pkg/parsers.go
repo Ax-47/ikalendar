@@ -4,6 +4,7 @@ import (
 	"errors"
 	"io"
 
+	"github.com/minoplhy/ikalendar/internal/componants"
 	"github.com/minoplhy/ikalendar/internal/encode"
 	"github.com/minoplhy/ikalendar/internal/parse"
 	"github.com/minoplhy/ikalendar/internal/registry"
@@ -17,7 +18,7 @@ func ParseCalendar(r io.Reader) (*vcalendar.VCalendar, error) {
 
 	// Automatically register every component supports
 	for name, factory := range registry.CalendarComponents {
-		engine.Register(name, factory)
+		engine.Register(componants.ComponentName(name), factory)
 	}
 
 	parser := parse.NewParser(r)

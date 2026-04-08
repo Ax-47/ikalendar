@@ -1,6 +1,11 @@
 package vjournal
 
-import "github.com/minoplhy/ikalendar/internal/share"
+import (
+	"fmt"
+
+	"github.com/minoplhy/ikalendar/internal/componants"
+	"github.com/minoplhy/ikalendar/internal/share"
+)
 
 type VJournal struct {
 	/* REQUIRED */
@@ -32,4 +37,33 @@ type VJournal struct {
 	CONTACT       []string
 	RELATED       []share.RELATED
 	REQUESTSTATUS []share.RequestStatus
+}
+
+func (j *VJournal) ProcessProperty(prop componants.Property) error {
+	name := share.PropertyName(prop.Name)
+	if handler, ok := vjournalHandlers[name]; ok {
+		return handler(j, prop)
+	}
+	// ignore unknown properties per RFC 5545 §3.8.8 (x-prop / iana-prop)
+	return nil
+}
+
+func (j *VJournal) Validate() error {
+	if j.UID == "" {
+		return fmt.Errorf("VJOURNAL: UID is required")
+	}
+	if j.DTSTAMP.IsZero() {
+		return fmt.Errorf("VJOURNAL: DTSTAMP is required")
+	}
+
+	// Recurrence rule constraint
+	if j.RRULE != nil && j.DTSTART == nil {
+		return fmt.Errorf("VJOURNAL: DTSTART is required when RRULE is present")
+	}
+
+	return nil
+}
+
+func (j *VJournal) AddChild(child componants.Component) error {
+	return fmt.Errorf("JOURNAL: does not support child components")
 }

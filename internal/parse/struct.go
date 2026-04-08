@@ -20,8 +20,7 @@ type Parser struct {
 	peek    string
 }
 type (
-	registryMap map[string]componants.ComponentFactory
-	Engine      struct {
-		registry registryMap
+	Engine struct {
+		registry componants.RegistryMap
 	}
 )
