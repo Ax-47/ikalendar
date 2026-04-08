@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/minoplhy/ikalendar/internal/componants"
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 type JournalHandler func(*VJournal, componants.Property) error
@@ -107,7 +107,7 @@ func handleRRule(jour *VJournal, prop componants.Property) error {
 }
 
 func handleSequence(jour *VJournal, prop componants.Property) error {
-	n, err := parsehelper.IntPtr(prop.Value)
+	n, err := utils.IntPtr(prop.Value)
 	if err != nil {
 		return fmt.Errorf("invalid SEQUENCE: %w", err)
 	}
@@ -186,7 +186,7 @@ func handleRequestStatus(jour *VJournal, prop componants.Property) error {
 		rs.Description = parts[1]
 	}
 	if len(parts) > 2 {
-		rs.Extra = parsehelper.Ptr(parts[2])
+		rs.Extra = utils.Ptr(parts[2])
 	}
 	return jour.AddRequestStatus(rs)
 }

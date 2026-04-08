@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/minoplhy/ikalendar/internal/componants"
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 type EventHandler func(*VEvent, componants.Property) error
@@ -124,7 +124,7 @@ func handleRRule(ev *VEvent, prop componants.Property) error {
 }
 
 func handlePriority(ev *VEvent, prop componants.Property) error {
-	n, err := parsehelper.IntPtr(prop.Value)
+	n, err := utils.IntPtr(prop.Value)
 	if err != nil {
 		return fmt.Errorf("invalid PRIORITY: %w", err)
 	}
@@ -132,7 +132,7 @@ func handlePriority(ev *VEvent, prop componants.Property) error {
 }
 
 func handleSequence(ev *VEvent, prop componants.Property) error {
-	n, err := parsehelper.IntPtr(prop.Value)
+	n, err := utils.IntPtr(prop.Value)
 	if err != nil {
 		return fmt.Errorf("invalid SEQUENCE: %w", err)
 	}
@@ -227,7 +227,7 @@ func handleRequestStatus(ev *VEvent, prop componants.Property) error {
 		rs.Description = parts[1]
 	}
 	if len(parts) > 2 {
-		rs.Extra = parsehelper.Ptr(parts[2])
+		rs.Extra = utils.Ptr(parts[2])
 	}
 	return ev.AddRequestStatus(rs)
 }

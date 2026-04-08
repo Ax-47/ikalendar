@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/minoplhy/ikalendar/internal/componants"
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 	"github.com/minoplhy/ikalendar/internal/valarm"
 )
 
@@ -72,20 +72,20 @@ func (ev *VEvent) AddChild(child componants.Component) error {
 		return nil
 	default:
 		return fmt.Errorf("%w: VEVENT cannot contain %T",
-			parsehelper.ErrInvalidComponent, child)
+			utils.ErrInvalidComponent, child)
 	}
 }
 
 func (ev *VEvent) Validate() error {
 	if ev.UID == "" {
-		return fmt.Errorf("%w: VEVENT missing UID", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VEVENT missing UID", utils.ErrMissingRequired)
 	}
 	if ev.DTSTAMP.Time.IsZero() {
-		return fmt.Errorf("%w: VEVENT missing DTSTAMP", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VEVENT missing DTSTAMP", utils.ErrMissingRequired)
 	}
 	if ev.DTEND != nil && ev.DURATION != nil {
 		return fmt.Errorf("%w: VEVENT cannot have both DTEND and DURATION",
-			parsehelper.ErrMutuallyExclusive)
+			utils.ErrMutuallyExclusive)
 	}
 
 	return nil

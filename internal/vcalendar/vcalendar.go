@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/minoplhy/ikalendar/internal/componants"
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 	"github.com/minoplhy/ikalendar/internal/vevent"
 )
 
@@ -51,16 +51,16 @@ func (cal *VCalendar) AddChild(child componants.Component) error {
 		return nil
 	default:
 		return fmt.Errorf("%w: VCALENDAR cannot contain %T",
-			parsehelper.ErrInvalidComponent, child)
+			utils.ErrInvalidComponent, child)
 	}
 }
 
 func (cal *VCalendar) Validate() error {
 	if cal.PRODID == "" {
-		return fmt.Errorf("%w: VCALENDAR missing PRODID", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VCALENDAR missing PRODID", utils.ErrMissingRequired)
 	}
 	if cal.VERSION == "" {
-		return fmt.Errorf("%w: VCALENDAR missing VERSION", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VCALENDAR missing VERSION", utils.ErrMissingRequired)
 	}
 	return nil
 }

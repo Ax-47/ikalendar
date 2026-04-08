@@ -1,74 +1,74 @@
 package vtodo
 
 import (
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 // ── Required ──────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetUID(uid string) error {
-	return parsehelper.SetOnceValue(&vt.UID, uid, string(PropUID))
+	return utils.SetOnceValue(&vt.UID, uid, string(PropUID))
 }
 
 func (vt *VTodo) SetDTSTAMP(it share.ITIME) error {
-	return parsehelper.SetOnceITIME(&vt.DTSTAMP, it, string(PropDTSTAMP))
+	return utils.SetOnceITIME(&vt.DTSTAMP, it, string(PropDTSTAMP))
 }
 
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetDTSTART(it share.ITIME) error {
-	return parsehelper.SetOnce(&vt.DTSTART, parsehelper.Ptr(it), string(PropDTSTART))
+	return utils.SetOnce(&vt.DTSTART, utils.Ptr(it), string(PropDTSTART))
 }
 
 func (vt *VTodo) SetCreated(it share.ITIME) error {
-	return parsehelper.SetOnce(&vt.CREATED, parsehelper.Ptr(it), string(PropCREATED))
+	return utils.SetOnce(&vt.CREATED, utils.Ptr(it), string(PropCREATED))
 }
 
 func (vt *VTodo) SetLastModified(it share.ITIME) error {
-	return parsehelper.SetOnce(&vt.LASTMODIFIED, parsehelper.Ptr(it), string(PropLASTMODIFIED))
+	return utils.SetOnce(&vt.LASTMODIFIED, utils.Ptr(it), string(PropLASTMODIFIED))
 }
 
 func (vt *VTodo) SetRRule(r share.RECUR) error {
-	return parsehelper.SetOnce(&vt.RRULE, parsehelper.Ptr(r), string(PropRRULE))
+	return utils.SetOnce(&vt.RRULE, utils.Ptr(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetSequence(n int) error {
-	return parsehelper.SetOnce(&vt.SEQUENCE, parsehelper.Ptr(n), string(PropSEQUENCE))
+	return utils.SetOnce(&vt.SEQUENCE, utils.Ptr(n), string(PropSEQUENCE))
 }
 
 // ── String ────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetClass(s string) error {
-	return parsehelper.SetOnce(&vt.CLASS, parsehelper.Ptr(s), string(PropCLASS))
+	return utils.SetOnce(&vt.CLASS, utils.Ptr(s), string(PropCLASS))
 }
 
 func (vt *VTodo) SetDescription(s string) error {
-	return parsehelper.SetOnce(&vt.DESCRIPTION, parsehelper.Ptr(s), string(PropDESCRIPTION))
+	return utils.SetOnce(&vt.DESCRIPTION, utils.Ptr(s), string(PropDESCRIPTION))
 }
 
 func (vt *VTodo) SetOrganizer(s string) error {
-	return parsehelper.SetOnce(&vt.ORGANIZER, parsehelper.Ptr(s), string(PropORGANIZER))
+	return utils.SetOnce(&vt.ORGANIZER, utils.Ptr(s), string(PropORGANIZER))
 }
 
 func (vt *VTodo) SetStatus(s string) error {
-	return parsehelper.SetOnce(&vt.STATUS, parsehelper.Ptr(s), string(PropSTATUS))
+	return utils.SetOnce(&vt.STATUS, utils.Ptr(s), string(PropSTATUS))
 }
 
 func (vt *VTodo) SetSummary(s string) error {
-	return parsehelper.SetOnce(&vt.SUMMARY, parsehelper.Ptr(s), string(PropSUMMARY))
+	return utils.SetOnce(&vt.SUMMARY, utils.Ptr(s), string(PropSUMMARY))
 }
 
 func (vt *VTodo) SetURL(s string) error {
-	return parsehelper.SetOnce(&vt.URL, parsehelper.Ptr(s), string(PropURL))
+	return utils.SetOnce(&vt.URL, utils.Ptr(s), string(PropURL))
 }
 
 // ── Multi-value ───────────────────────────────────────────────────────────────
 
 func (vt *VTodo) AddAttach(uri string) error {
-	vt.ATTACH = append(vt.ATTACH, share.ATTACH{URI: parsehelper.Ptr(uri)}) // TODO: construct
+	vt.ATTACH = append(vt.ATTACH, share.ATTACH{URI: utils.Ptr(uri)}) // TODO: construct
 	return nil
 }
 

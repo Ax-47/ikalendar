@@ -1,4 +1,4 @@
-package parsehelper
+package utils
 
 import (
 	"errors"

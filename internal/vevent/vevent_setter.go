@@ -3,107 +3,106 @@ package vevent
 import (
 	"fmt"
 
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 // ── Required ──────────────────────────────────────────────────────────────────
-
 func (ev *VEvent) SetUID(uid string) error {
-	return parsehelper.SetOnceValue(&ev.UID, uid, string(PropUID))
+	return utils.SetOnceValue(&ev.UID, uid, string(PropUID))
 }
 
 func (ev *VEvent) SetDTSTAMP(it share.ITIME) error {
-	return parsehelper.SetOnceITIME(&ev.DTSTAMP, it, string(PropDTSTAMP))
+	return utils.SetOnceITIME(&ev.DTSTAMP, it, string(PropDTSTAMP))
 }
 
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (ev *VEvent) SetDTSTART(it share.ITIME) error {
-	return parsehelper.SetOnce(&ev.DTSTART, parsehelper.Ptr(it), string(PropDTSTART))
+	return utils.SetOnce(&ev.DTSTART, utils.Ptr(it), string(PropDTSTART))
 }
 
 func (ev *VEvent) SetDTEND(it share.ITIME) error {
 	if ev.DURATION != nil {
-		return fmt.Errorf("%w: DTEND and DURATION", parsehelper.ErrMutuallyExclusive)
+		return fmt.Errorf("%w: DTEND and DURATION", utils.ErrMutuallyExclusive)
 	}
-	return parsehelper.SetOnce(&ev.DTEND, parsehelper.Ptr(it), string(PropDTEND))
+	return utils.SetOnce(&ev.DTEND, utils.Ptr(it), string(PropDTEND))
 }
 
 func (ev *VEvent) SetDuration(d share.DURATION) error {
 	if ev.DTEND != nil {
-		return fmt.Errorf("%w: DURATION and DTEND", parsehelper.ErrMutuallyExclusive)
+		return fmt.Errorf("%w: DURATION and DTEND", utils.ErrMutuallyExclusive)
 	}
-	return parsehelper.SetOnce(&ev.DURATION, parsehelper.Ptr(d), string(PropDURATION))
+	return utils.SetOnce(&ev.DURATION, utils.Ptr(d), string(PropDURATION))
 }
 
 func (ev *VEvent) SetCreated(it share.ITIME) error {
 	if ev.CREATED != nil {
-		return fmt.Errorf("%w: CREATED", parsehelper.ErrDuplicateProperty)
+		return fmt.Errorf("%w: CREATED", utils.ErrDuplicateProperty)
 	}
-	return parsehelper.SetOnce(&ev.CREATED, parsehelper.Ptr(it), string(PropCREATED))
+	return utils.SetOnce(&ev.CREATED, utils.Ptr(it), string(PropCREATED))
 }
 
 func (ev *VEvent) SetLastModified(it share.ITIME) error {
-	return parsehelper.SetOnce(&ev.LASTMODIFIED, parsehelper.Ptr(it), string(PropLASTMODIFIED))
+	return utils.SetOnce(&ev.LASTMODIFIED, utils.Ptr(it), string(PropLASTMODIFIED))
 }
 
 func (ev *VEvent) SetRRule(r share.RECUR) error {
-	return parsehelper.SetOnce(&ev.RRULE, parsehelper.Ptr(r), string(PropRRULE))
+	return utils.SetOnce(&ev.RRULE, utils.Ptr(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────
 
 func (ev *VEvent) SetPriority(n int) error {
-	return parsehelper.SetOnce(&ev.PRIORITY, parsehelper.Ptr(n), "PRIORITY")
+	return utils.SetOnce(&ev.PRIORITY, utils.Ptr(n), "PRIORITY")
 }
 
 func (ev *VEvent) SetSequence(n int) error {
-	return parsehelper.SetOnce(&ev.SEQUENCE, parsehelper.Ptr(n), "SEQUENCE")
+	return utils.SetOnce(&ev.SEQUENCE, utils.Ptr(n), "SEQUENCE")
 }
 
 // ── String ────────────────────────────────────────────────────────────────────
 
 func (ev *VEvent) SetClass(s string) error {
-	return parsehelper.SetOnce(&ev.CLASS, parsehelper.Ptr(s), "CLASS")
+	return utils.SetOnce(&ev.CLASS, utils.Ptr(s), "CLASS")
 }
 
 func (ev *VEvent) SetDescription(s string) error {
-	return parsehelper.SetOnce(&ev.DESCRIPTION, parsehelper.Ptr(s), "DESCRIPTION")
+	return utils.SetOnce(&ev.DESCRIPTION, utils.Ptr(s), "DESCRIPTION")
 }
 
 func (ev *VEvent) SetGeo(s string) error {
-	return parsehelper.SetOnce(&ev.GEO, parsehelper.Ptr(s), "GEO")
+	return utils.SetOnce(&ev.GEO, utils.Ptr(s), "GEO")
 }
 
 func (ev *VEvent) SetLocation(s string) error {
-	return parsehelper.SetOnce(&ev.LOCATION, parsehelper.Ptr(s), "LOCATION")
+	return utils.SetOnce(&ev.LOCATION, utils.Ptr(s), "LOCATION")
 }
 
 func (ev *VEvent) SetOrganizer(s string) error {
-	return parsehelper.SetOnce(&ev.ORGANIZER, parsehelper.Ptr(s), "ORGANIZER")
+	return utils.SetOnce(&ev.ORGANIZER, utils.Ptr(s), "ORGANIZER")
 }
 
 func (ev *VEvent) SetStatus(s string) error {
-	return parsehelper.SetOnce(&ev.STATUS, parsehelper.Ptr(s), "STATUS")
+	return utils.SetOnce(&ev.STATUS, utils.Ptr(s), "STATUS")
 }
 
 func (ev *VEvent) SetSummary(s string) error {
-	return parsehelper.SetOnce(&ev.SUMMARY, parsehelper.Ptr(s), "SUMMARY")
+	return utils.SetOnce(&ev.SUMMARY, utils.Ptr(s), "SUMMARY")
 }
 
 func (ev *VEvent) SetTransp(s string) error {
-	return parsehelper.SetOnce(&ev.TRANSP, parsehelper.Ptr(s), "TRANSP")
+	return utils.SetOnce(&ev.TRANSP, utils.Ptr(s), "TRANSP")
 }
 
 func (ev *VEvent) SetURL(s string) error {
-	return parsehelper.SetOnce(&ev.URL, parsehelper.Ptr(s), "URL")
+	return utils.SetOnce(&ev.URL, utils.Ptr(s), "URL")
 }
 
 // ── Multi-value ───────────────────────────────────────────────────────────────
 
 func (ev *VEvent) AddAttach(uri string) error {
-	ev.ATTACH = append(ev.ATTACH, share.ATTACH{URI: parsehelper.Ptr(uri)}) // TODO: construct
+	ev.ATTACH = append(ev.ATTACH, share.ATTACH{URI: utils.Ptr(uri)}) // TODO: construct
 	return nil
 }
 

@@ -1,74 +1,74 @@
 package vjournal
 
 import (
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 // ── Required ──────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetUID(uid string) error {
-	return parsehelper.SetOnceValue(&jour.UID, uid, string(PropUID))
+	return utils.SetOnceValue(&jour.UID, uid, string(PropUID))
 }
 
 func (jour *VJournal) SetDTSTAMP(it share.ITIME) error {
-	return parsehelper.SetOnceITIME(&jour.DTSTAMP, it, string(PropDTSTAMP))
+	return utils.SetOnceITIME(&jour.DTSTAMP, it, string(PropDTSTAMP))
 }
 
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetDTSTART(it share.ITIME) error {
-	return parsehelper.SetOnce(&jour.DTSTART, parsehelper.Ptr(it), string(PropDTSTART))
+	return utils.SetOnce(&jour.DTSTART, utils.Ptr(it), string(PropDTSTART))
 }
 
 func (jour *VJournal) SetCreated(it share.ITIME) error {
-	return parsehelper.SetOnce(&jour.CREATED, parsehelper.Ptr(it), string(PropCREATED))
+	return utils.SetOnce(&jour.CREATED, utils.Ptr(it), string(PropCREATED))
 }
 
 func (jour *VJournal) SetLastModified(it share.ITIME) error {
-	return parsehelper.SetOnce(&jour.LASTMODIFIED, parsehelper.Ptr(it), string(PropLASTMODIFIED))
+	return utils.SetOnce(&jour.LASTMODIFIED, utils.Ptr(it), string(PropLASTMODIFIED))
 }
 
 func (jour *VJournal) SetRRule(r share.RECUR) error {
-	return parsehelper.SetOnce(&jour.RRULE, parsehelper.Ptr(r), string(PropRRULE))
+	return utils.SetOnce(&jour.RRULE, utils.Ptr(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetSequence(n int) error {
-	return parsehelper.SetOnce(&jour.SEQUENCE, parsehelper.Ptr(n), string(PropSEQUENCE))
+	return utils.SetOnce(&jour.SEQUENCE, utils.Ptr(n), string(PropSEQUENCE))
 }
 
 // ── String ────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetClass(s string) error {
-	return parsehelper.SetOnce(&jour.CLASS, parsehelper.Ptr(s), string(PropCLASS))
+	return utils.SetOnce(&jour.CLASS, utils.Ptr(s), string(PropCLASS))
 }
 
 func (jour *VJournal) SetDescription(s string) error {
-	return parsehelper.SetOnce(&jour.DESCRIPTION, parsehelper.Ptr(s), string(PropDESCRIPTION))
+	return utils.SetOnce(&jour.DESCRIPTION, utils.Ptr(s), string(PropDESCRIPTION))
 }
 
 func (jour *VJournal) SetOrganizer(s string) error {
-	return parsehelper.SetOnce(&jour.ORGANIZER, parsehelper.Ptr(s), string(PropORGANIZER))
+	return utils.SetOnce(&jour.ORGANIZER, utils.Ptr(s), string(PropORGANIZER))
 }
 
 func (jour *VJournal) SetStatus(s string) error {
-	return parsehelper.SetOnce(&jour.STATUS, parsehelper.Ptr(s), string(PropSTATUS))
+	return utils.SetOnce(&jour.STATUS, utils.Ptr(s), string(PropSTATUS))
 }
 
 func (jour *VJournal) SetSummary(s string) error {
-	return parsehelper.SetOnce(&jour.SUMMARY, parsehelper.Ptr(s), string(PropSUMMARY))
+	return utils.SetOnce(&jour.SUMMARY, utils.Ptr(s), string(PropSUMMARY))
 }
 
 func (jour *VJournal) SetURL(s string) error {
-	return parsehelper.SetOnce(&jour.URL, parsehelper.Ptr(s), string(PropURL))
+	return utils.SetOnce(&jour.URL, utils.Ptr(s), string(PropURL))
 }
 
 // ── Multi-value ───────────────────────────────────────────────────────────────
 
 func (jour *VJournal) AddAttach(uri string) error {
-	jour.ATTACH = append(jour.ATTACH, share.ATTACH{URI: parsehelper.Ptr(uri)}) // TODO: construct
+	jour.ATTACH = append(jour.ATTACH, share.ATTACH{URI: utils.Ptr(uri)}) // TODO: construct
 	return nil
 }
 
