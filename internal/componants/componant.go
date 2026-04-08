@@ -6,6 +6,8 @@ const (
 	ComponentVCalendar ComponentName = "VCALENDAR"
 	ComponentVEvent    ComponentName = "VEVENT"
 	ComponentVAlarm    ComponentName = "VALARM"
+	ComponentVJournal  ComponentName = "VJOURNAL"
+	ComponentVTodo     ComponentName = "VTODO"
 )
 
 type (
