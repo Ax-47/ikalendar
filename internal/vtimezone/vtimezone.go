@@ -20,10 +20,10 @@ type VTimezone struct {
 	DAYLIGHT []Daylight
 }
 
-func (ev *VTimezone) ProcessProperty(prop componants.Property) error {
+func (tz *VTimezone) ProcessProperty(prop componants.Property) error {
 	name := share.PropertyName(prop.Name)
 	if handler, ok := vtimezoneHandlers[name]; ok {
-		return handler(ev, prop)
+		return handler(tz, prop)
 	}
 	// ignore unknown properties per RFC 5545 §3.8.8 (x-prop / iana-prop)
 	return nil
