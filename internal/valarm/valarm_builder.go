@@ -3,8 +3,8 @@ package valarm
 import (
 	"fmt"
 
-	parsehelper "github.com/minoplhy/ikalendar/internal/parse_helper"
 	"github.com/minoplhy/ikalendar/internal/share"
+	"github.com/minoplhy/ikalendar/internal/utils"
 )
 
 type AlarmOption func(*VAlarm) error
@@ -14,9 +14,9 @@ type AlarmOption func(*VAlarm) error
 func WithAction(action string) AlarmOption {
 	return func(a *VAlarm) error {
 		if action == "" {
-			return fmt.Errorf("%w: ACTION cannot be empty", parsehelper.ErrMissingRequired)
+			return fmt.Errorf("%w: ACTION cannot be empty", utils.ErrMissingRequired)
 		}
-		a.Action = parsehelper.Ptr(action)
+		a.Action = utils.Ptr(action)
 		return nil
 	}
 }
@@ -24,9 +24,9 @@ func WithAction(action string) AlarmOption {
 func WithTrigger(d share.DURATION) AlarmOption {
 	return func(a *VAlarm) error {
 		if a.Trigger != nil {
-			return fmt.Errorf("%w: TRIGGER", parsehelper.ErrDuplicateProperty)
+			return fmt.Errorf("%w: TRIGGER", utils.ErrDuplicateProperty)
 		}
-		a.Trigger = parsehelper.Ptr(d)
+		a.Trigger = utils.Ptr(d)
 		return nil
 	}
 }
@@ -66,9 +66,9 @@ func WithTriggerDays(days int, before bool) AlarmOption {
 func WithAlarmDescription(desc string) AlarmOption {
 	return func(a *VAlarm) error {
 		if a.Description != nil {
-			return fmt.Errorf("%w: DESCRIPTION", parsehelper.ErrDuplicateProperty)
+			return fmt.Errorf("%w: DESCRIPTION", utils.ErrDuplicateProperty)
 		}
-		a.Description = parsehelper.Ptr(desc)
+		a.Description = utils.Ptr(desc)
 		return nil
 	}
 }
@@ -76,9 +76,9 @@ func WithAlarmDescription(desc string) AlarmOption {
 func WithAlarmSummary(summary string) AlarmOption {
 	return func(a *VAlarm) error {
 		if a.Summary != nil {
-			return fmt.Errorf("%w: SUMMARY", parsehelper.ErrDuplicateProperty)
+			return fmt.Errorf("%w: SUMMARY", utils.ErrDuplicateProperty)
 		}
-		a.Summary = parsehelper.Ptr(summary)
+		a.Summary = utils.Ptr(summary)
 		return nil
 	}
 }
@@ -100,10 +100,10 @@ func NewAlarm(opts ...AlarmOption) (*VAlarm, error) {
 
 func validateAlarm(a *VAlarm) error {
 	if a.Action == nil {
-		return fmt.Errorf("%w: VALARM missing ACTION", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VALARM missing ACTION", utils.ErrMissingRequired)
 	}
 	if a.Trigger == nil {
-		return fmt.Errorf("%w: VALARM missing TRIGGER", parsehelper.ErrMissingRequired)
+		return fmt.Errorf("%w: VALARM missing TRIGGER", utils.ErrMissingRequired)
 	}
 	return nil
 }
