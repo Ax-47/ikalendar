@@ -2,17 +2,19 @@ package parse
 
 import (
 	"strings"
+
+	"github.com/minoplhy/ikalendar/internal/componants"
 )
 
 // parsePropertyLine does the string splitting (Name:Value;Param=X)
-func (p *Parser) parsePropertyLine(line string) Property {
+func (p *Parser) parsePropertyLine(line string) componants.Property {
 	leftPart, rawValue, found := strings.Cut(line, ":")
 	if !found {
-		return Property{}
+		return componants.Property{}
 	}
 
 	namePart, paramStr, hasParams := strings.Cut(leftPart, ";")
-	prop := Property{
+	prop := componants.Property{
 		Name:   strings.ToUpper(strings.TrimSpace(namePart)),
 		Value:  Unescape(rawValue), // Your unescape helper
 		Params: make(map[string]string),
@@ -29,7 +31,7 @@ func (p *Parser) parsePropertyLine(line string) Property {
 
 // Next reads the input and yields the next complete
 // Returns false when the input is fully consumed.
-func (p *Parser) Next() (Property, bool, error) {
+func (p *Parser) Next() (componants.Property, bool, error) {
 	var currentLine strings.Builder
 
 	if p.peek != "" {
@@ -38,7 +40,7 @@ func (p *Parser) Next() (Property, bool, error) {
 	} else if p.scanner.Scan() {
 		currentLine.WriteString(p.scanner.Text())
 	} else {
-		return Property{}, false, p.scanner.Err() // EOF
+		return componants.Property{}, false, p.scanner.Err() // EOF
 	}
 
 	for p.scanner.Scan() {

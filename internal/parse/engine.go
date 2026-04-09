@@ -1,23 +1,26 @@
 package parse
 
-import "errors"
+import (
+	"errors"
 
-func (e *Engine) Register(name string, registrant func() IComponent) {
+	"github.com/minoplhy/ikalendar/internal/componants"
+)
+
+func (e *Engine) Register(name componants.ComponentName, registrant componants.ComponentFactory) {
 	e.registry[name] = registrant
 }
 
 func NewEngine() *Engine {
 	return &Engine{
-		registry: make(map[string]func() IComponent),
+		registry: make(componants.RegistryMap),
 	}
 }
 
 var ErrNoRootComponent = errors.New("parse: no root component found in stream")
 
-// Run takes input Parser and builds the Component tree
-func (e *Engine) Run(parser *Parser) (IComponent, error) {
-	var root IComponent
-	var stack []IComponent
+func (e *Engine) Run(parser *Parser) (componants.Component, error) {
+	var root componants.Component
+	var stack []componants.Component
 	var ignoreDepth int // Tracks nested levels of unsupported components
 
 	for {
@@ -46,7 +49,7 @@ func (e *Engine) Run(parser *Parser) (IComponent, error) {
 
 		switch prop.Name {
 		case "BEGIN":
-			factory, exists := e.registry[prop.Value]
+			factory, exists := e.registry[componants.ComponentName(prop.Value)]
 			if !exists {
 				// invalid or We don't support this component
 				// Tell the parser to ignore everything until the END tag

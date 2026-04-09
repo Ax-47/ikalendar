@@ -1,4 +1,4 @@
-package icalendar
+package share
 
 type EventClass string
 
