@@ -24,9 +24,9 @@ func (cal *VCalendar) SetVERSION(s string) error {
 }
 
 func (cal *VCalendar) SetCALSCALE(s string) error {
-	return utils.SetOnce(&cal.CALSCALE, utils.Ptr(s), string(PropCALSCALE))
+	return utils.SetOnce(&cal.CALSCALE, new(s), string(PropCALSCALE))
 }
 
 func (cal *VCalendar) SetMETHOD(s string) error {
-	return utils.SetOnce(&cal.METHOD, utils.Ptr(s), string(PropMETHOD))
+	return utils.SetOnce(&cal.METHOD, new(s), string(PropMETHOD))
 }

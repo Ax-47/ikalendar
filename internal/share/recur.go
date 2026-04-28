@@ -117,7 +117,7 @@ func intListHandler(name string, field func(*RECUR) *[]int) recurHandler {
 func ParseRECUR(value string) (RECUR, error) {
 	r := RECUR{}
 
-	for _, part := range strings.Split(value, ";") {
+	for part := range strings.SplitSeq(value, ";") {
 		part = strings.TrimSpace(part)
 		if part == "" {
 			continue

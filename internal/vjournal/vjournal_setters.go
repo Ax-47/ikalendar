@@ -18,57 +18,57 @@ func (jour *VJournal) SetDTSTAMP(it share.ITIME) error {
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetDTSTART(it share.ITIME) error {
-	return utils.SetOnce(&jour.DTSTART, utils.Ptr(it), string(PropDTSTART))
+	return utils.SetOnce(&jour.DTSTART, new(it), string(PropDTSTART))
 }
 
 func (jour *VJournal) SetCreated(it share.ITIME) error {
-	return utils.SetOnce(&jour.CREATED, utils.Ptr(it), string(PropCREATED))
+	return utils.SetOnce(&jour.CREATED, new(it), string(PropCREATED))
 }
 
 func (jour *VJournal) SetLastModified(it share.ITIME) error {
-	return utils.SetOnce(&jour.LASTMODIFIED, utils.Ptr(it), string(PropLASTMODIFIED))
+	return utils.SetOnce(&jour.LASTMODIFIED, new(it), string(PropLASTMODIFIED))
 }
 
 func (jour *VJournal) SetRRule(r share.RECUR) error {
-	return utils.SetOnce(&jour.RRULE, utils.Ptr(r), string(PropRRULE))
+	return utils.SetOnce(&jour.RRULE, new(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetSequence(n int) error {
-	return utils.SetOnce(&jour.SEQUENCE, utils.Ptr(n), string(PropSEQUENCE))
+	return utils.SetOnce(&jour.SEQUENCE, new(n), string(PropSEQUENCE))
 }
 
 // ── String ────────────────────────────────────────────────────────────────────
 
 func (jour *VJournal) SetClass(s string) error {
-	return utils.SetOnce(&jour.CLASS, utils.Ptr(s), string(PropCLASS))
+	return utils.SetOnce(&jour.CLASS, new(s), string(PropCLASS))
 }
 
 func (jour *VJournal) SetDescription(s string) error {
-	return utils.SetOnce(&jour.DESCRIPTION, utils.Ptr(s), string(PropDESCRIPTION))
+	return utils.SetOnce(&jour.DESCRIPTION, new(s), string(PropDESCRIPTION))
 }
 
 func (jour *VJournal) SetOrganizer(s string) error {
-	return utils.SetOnce(&jour.ORGANIZER, utils.Ptr(s), string(PropORGANIZER))
+	return utils.SetOnce(&jour.ORGANIZER, new(s), string(PropORGANIZER))
 }
 
 func (jour *VJournal) SetStatus(s string) error {
-	return utils.SetOnce(&jour.STATUS, utils.Ptr(s), string(PropSTATUS))
+	return utils.SetOnce(&jour.STATUS, new(s), string(PropSTATUS))
 }
 
 func (jour *VJournal) SetSummary(s string) error {
-	return utils.SetOnce(&jour.SUMMARY, utils.Ptr(s), string(PropSUMMARY))
+	return utils.SetOnce(&jour.SUMMARY, new(s), string(PropSUMMARY))
 }
 
 func (jour *VJournal) SetURL(s string) error {
-	return utils.SetOnce(&jour.URL, utils.Ptr(s), string(PropURL))
+	return utils.SetOnce(&jour.URL, new(s), string(PropURL))
 }
 
 // ── Multi-value ───────────────────────────────────────────────────────────────
 
 func (jour *VJournal) AddAttach(uri string) error {
-	jour.ATTACH = append(jour.ATTACH, share.ATTACH{URI: utils.Ptr(uri)}) // TODO: construct
+	jour.ATTACH = append(jour.ATTACH, share.ATTACH{URI: new(uri)}) // TODO: construct
 	return nil
 }
 

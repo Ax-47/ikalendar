@@ -14,11 +14,11 @@ func (tz *VTimezone) SetTZID(id string) error {
 // ── Optional ──────────────────────────────────────────────────────────────────
 
 func (tz *VTimezone) SetLastModified(it share.ITIME) error {
-	return utils.SetOnce(&tz.LASTMODIFIED, utils.Ptr(it), "LAST-MODIFIED")
+	return utils.SetOnce(&tz.LASTMODIFIED, new(it), "LAST-MODIFIED")
 }
 
 func (tz *VTimezone) SetTZURL(url string) error {
-	return utils.SetOnce(&tz.TZURL, utils.Ptr(url), "TZURL")
+	return utils.SetOnce(&tz.TZURL, new(url), "TZURL")
 }
 
 // ── Child Components ──────────────────────────────────────────────────────────

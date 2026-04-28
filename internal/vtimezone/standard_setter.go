@@ -27,7 +27,7 @@ func (s *Standard) SetTZOffsetTo(offset string) error { // TODO: validate
 }
 
 func (s *Standard) SetRRule(r share.RECUR) error {
-	return utils.SetOnce(&s.RRULE, utils.Ptr(r), "RRULE")
+	return utils.SetOnce(&s.RRULE, new(r), "RRULE")
 }
 
 func (s *Standard) AddRDate(it share.ITIME) error {
@@ -36,5 +36,5 @@ func (s *Standard) AddRDate(it share.ITIME) error {
 }
 
 func (s *Standard) SetTZName(name string) error {
-	return utils.SetOnce(&s.TZNAME, utils.Ptr(name), "TZNAME")
+	return utils.SetOnce(&s.TZNAME, new(name), "TZNAME")
 }

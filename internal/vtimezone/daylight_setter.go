@@ -27,7 +27,7 @@ func (d *Daylight) SetTZOffsetTo(offset string) error { // TODO: validate
 }
 
 func (d *Daylight) SetRRule(r share.RECUR) error {
-	return utils.SetOnce(&d.RRULE, utils.Ptr(r), "RRULE")
+	return utils.SetOnce(&d.RRULE, new(r), "RRULE")
 }
 
 func (d *Daylight) AddRDate(it share.ITIME) error {
@@ -36,5 +36,5 @@ func (d *Daylight) AddRDate(it share.ITIME) error {
 }
 
 func (d *Daylight) SetTZName(name string) error {
-	return utils.SetOnce(&d.TZNAME, utils.Ptr(name), "TZNAME")
+	return utils.SetOnce(&d.TZNAME, new(name), "TZNAME")
 }

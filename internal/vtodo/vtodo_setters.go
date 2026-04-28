@@ -18,57 +18,57 @@ func (vt *VTodo) SetDTSTAMP(it share.ITIME) error {
 // ── Time ──────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetDTSTART(it share.ITIME) error {
-	return utils.SetOnce(&vt.DTSTART, utils.Ptr(it), string(PropDTSTART))
+	return utils.SetOnce(&vt.DTSTART, new(it), string(PropDTSTART))
 }
 
 func (vt *VTodo) SetCreated(it share.ITIME) error {
-	return utils.SetOnce(&vt.CREATED, utils.Ptr(it), string(PropCREATED))
+	return utils.SetOnce(&vt.CREATED, new(it), string(PropCREATED))
 }
 
 func (vt *VTodo) SetLastModified(it share.ITIME) error {
-	return utils.SetOnce(&vt.LASTMODIFIED, utils.Ptr(it), string(PropLASTMODIFIED))
+	return utils.SetOnce(&vt.LASTMODIFIED, new(it), string(PropLASTMODIFIED))
 }
 
 func (vt *VTodo) SetRRule(r share.RECUR) error {
-	return utils.SetOnce(&vt.RRULE, utils.Ptr(r), string(PropRRULE))
+	return utils.SetOnce(&vt.RRULE, new(r), string(PropRRULE))
 }
 
 // ── Int ───────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetSequence(n int) error {
-	return utils.SetOnce(&vt.SEQUENCE, utils.Ptr(n), string(PropSEQUENCE))
+	return utils.SetOnce(&vt.SEQUENCE, new(n), string(PropSEQUENCE))
 }
 
 // ── String ────────────────────────────────────────────────────────────────────
 
 func (vt *VTodo) SetClass(s string) error {
-	return utils.SetOnce(&vt.CLASS, utils.Ptr(s), string(PropCLASS))
+	return utils.SetOnce(&vt.CLASS, new(s), string(PropCLASS))
 }
 
 func (vt *VTodo) SetDescription(s string) error {
-	return utils.SetOnce(&vt.DESCRIPTION, utils.Ptr(s), string(PropDESCRIPTION))
+	return utils.SetOnce(&vt.DESCRIPTION, new(s), string(PropDESCRIPTION))
 }
 
 func (vt *VTodo) SetOrganizer(s string) error {
-	return utils.SetOnce(&vt.ORGANIZER, utils.Ptr(s), string(PropORGANIZER))
+	return utils.SetOnce(&vt.ORGANIZER, new(s), string(PropORGANIZER))
 }
 
 func (vt *VTodo) SetStatus(s string) error {
-	return utils.SetOnce(&vt.STATUS, utils.Ptr(s), string(PropSTATUS))
+	return utils.SetOnce(&vt.STATUS, new(s), string(PropSTATUS))
 }
 
 func (vt *VTodo) SetSummary(s string) error {
-	return utils.SetOnce(&vt.SUMMARY, utils.Ptr(s), string(PropSUMMARY))
+	return utils.SetOnce(&vt.SUMMARY, new(s), string(PropSUMMARY))
 }
 
 func (vt *VTodo) SetURL(s string) error {
-	return utils.SetOnce(&vt.URL, utils.Ptr(s), string(PropURL))
+	return utils.SetOnce(&vt.URL, new(s), string(PropURL))
 }
 
 // ── Multi-value ───────────────────────────────────────────────────────────────
 
 func (vt *VTodo) AddAttach(uri string) error {
-	vt.ATTACH = append(vt.ATTACH, share.ATTACH{URI: utils.Ptr(uri)}) // TODO: construct
+	vt.ATTACH = append(vt.ATTACH, share.ATTACH{URI: new(uri)}) // TODO: construct
 	return nil
 }
 
