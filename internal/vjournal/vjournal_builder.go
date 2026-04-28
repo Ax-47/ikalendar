@@ -8,14 +8,14 @@ import (
 
 type VJournalOption func(*VJournal) error
 
-// Newjourent creates a new Vjourent
+// NewJournal creates a new NewJournal
 //
-//	jour, err := ikalendar.Newjourent("uid-123",
+//	jour, err := ikalendar.NewJournal("uid-123",
 //	    ikalendar.WithSummary("Team Standup"),
 //	    ikalendar.WithDtStart(time.Now()),
 //	)
 
-func Newjourent(uid string, opts ...VJournalOption) (*VJournal, error) {
+func NewJournal(uid string, opts ...VJournalOption) (*VJournal, error) {
 	jour := &VJournal{}
 	if err := jour.SetUID(uid); err != nil {
 		return nil, err

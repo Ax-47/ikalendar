@@ -8,14 +8,14 @@ import (
 
 type VTodoOption func(*VTodo) error
 
-// Newvtent creates a new Vvtent
+// NewVTodo creates a new VTodo
 //
-//	vt, err := ikalendar.Newvtent("uid-123",
+//	vt, err := ikalendar.NewVTodo("uid-123",
 //	    ikalendar.WithSummary("Team Standup"),
 //	    ikalendar.WithDtStart(time.Now()),
 //	)
 
-func Newvtent(uid string, opts ...VTodoOption) (*VTodo, error) {
+func NewVTodo(uid string, opts ...VTodoOption) (*VTodo, error) {
 	vt := &VTodo{}
 	if err := vt.SetUID(uid); err != nil {
 		return nil, err

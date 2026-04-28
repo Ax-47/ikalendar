@@ -7,10 +7,6 @@ import (
 	"github.com/minoplhy/ikalendar/internal/componants"
 )
 
-type (
-	Validator interface{ Validate() error }
-)
-
 func NewParser(r io.Reader) *Parser {
 	return &Parser{scanner: bufio.NewScanner(r)}
 }

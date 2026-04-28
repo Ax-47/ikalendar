@@ -21,7 +21,7 @@ func (p *Parser) parsePropertyLine(line string) componants.Property {
 	}
 
 	if hasParams {
-		for _, param := range strings.Split(paramStr, ";") {
+		for param := range strings.SplitSeq(paramStr, ";") {
 			k, v, _ := strings.Cut(param, "=")
 			prop.Params[strings.ToUpper(k)] = strings.Trim(v, `"`)
 		}

@@ -66,9 +66,13 @@ func (ev *VEvent) ProcessProperty(prop componants.Property) error {
 }
 
 func (ev *VEvent) AddChild(child componants.Component) error {
+	if err := child.Validate(); err != nil {
+		return err
+	}
 	switch c := child.(type) {
 	case *valarm.VAlarm:
 		ev.VALARM = append(ev.VALARM, *c)
+
 		return nil
 	default:
 		return fmt.Errorf("%w: VEVENT cannot contain %T",
@@ -88,8 +92,8 @@ func (ev *VEvent) Validate() error {
 			utils.ErrMutuallyExclusive)
 	}
 
-	for _, valarm := range ev.VALARM {
-		if err := valarm.Validate(); err != nil {
+	for _, child := range ev.VALARM {
+		if err := child.Validate(); err != nil {
 			return err
 		}
 	}

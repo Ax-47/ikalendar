@@ -45,6 +45,10 @@ func (cal *VCalendar) ProcessProperty(prop componants.Property) error {
 }
 
 func (cal *VCalendar) AddChild(child componants.Component) error {
+	if err := child.Validate(); err != nil {
+		return err
+	}
+
 	switch c := child.(type) {
 	case *vevent.VEvent:
 		cal.VEVENT = append(cal.VEVENT, *c)
@@ -62,5 +66,6 @@ func (cal *VCalendar) Validate() error {
 	if cal.VERSION == "" {
 		return fmt.Errorf("%w: VCALENDAR missing VERSION", utils.ErrMissingRequired)
 	}
+
 	return nil
 }

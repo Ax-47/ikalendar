@@ -92,18 +92,8 @@ func NewAlarm(opts ...AlarmOption) (*VAlarm, error) {
 			return nil, err
 		}
 	}
-	if err := validateAlarm(a); err != nil {
+	if err := a.Validate(); err != nil {
 		return nil, err
 	}
 	return a, nil
-}
-
-func validateAlarm(a *VAlarm) error {
-	if a.Action == nil {
-		return fmt.Errorf("%w: VALARM missing ACTION", utils.ErrMissingRequired)
-	}
-	if a.Trigger == nil {
-		return fmt.Errorf("%w: VALARM missing TRIGGER", utils.ErrMissingRequired)
-	}
-	return nil
 }
