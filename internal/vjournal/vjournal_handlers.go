@@ -186,7 +186,7 @@ func handleRequestStatus(jour *VJournal, prop componants.Property) error {
 		rs.Description = parts[1]
 	}
 	if len(parts) > 2 {
-		rs.Extra = utils.Ptr(parts[2])
+		rs.Extra = new(parts[2])
 	}
 	return jour.AddRequestStatus(rs)
 }

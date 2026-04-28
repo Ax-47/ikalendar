@@ -88,5 +88,11 @@ func (ev *VEvent) Validate() error {
 			utils.ErrMutuallyExclusive)
 	}
 
+	for _, valarm := range ev.VALARM {
+		if err := valarm.Validate(); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }

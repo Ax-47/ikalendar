@@ -8,9 +8,6 @@ import (
 	"github.com/minoplhy/ikalendar/internal/share"
 )
 
-//nolint:gocritic
-func Ptr[T any](t T) *T { return &t }
-
 func IntPtr(s string) (*int, error) {
 	i, err := strconv.Atoi(s)
 	if err != nil {

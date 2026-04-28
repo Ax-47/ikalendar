@@ -16,7 +16,7 @@ func WithAction(action string) AlarmOption {
 		if action == "" {
 			return fmt.Errorf("%w: ACTION cannot be empty", utils.ErrMissingRequired)
 		}
-		a.Action = utils.Ptr(action)
+		a.Action = new(action)
 		return nil
 	}
 }
@@ -26,7 +26,7 @@ func WithTrigger(d share.DURATION) AlarmOption {
 		if a.Trigger != nil {
 			return fmt.Errorf("%w: TRIGGER", utils.ErrDuplicateProperty)
 		}
-		a.Trigger = utils.Ptr(d)
+		a.Trigger = new(d)
 		return nil
 	}
 }
@@ -68,7 +68,7 @@ func WithAlarmDescription(desc string) AlarmOption {
 		if a.Description != nil {
 			return fmt.Errorf("%w: DESCRIPTION", utils.ErrDuplicateProperty)
 		}
-		a.Description = utils.Ptr(desc)
+		a.Description = new(desc)
 		return nil
 	}
 }
@@ -78,7 +78,7 @@ func WithAlarmSummary(summary string) AlarmOption {
 		if a.Summary != nil {
 			return fmt.Errorf("%w: SUMMARY", utils.ErrDuplicateProperty)
 		}
-		a.Summary = utils.Ptr(summary)
+		a.Summary = new(summary)
 		return nil
 	}
 }

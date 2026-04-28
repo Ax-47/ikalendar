@@ -186,7 +186,7 @@ func handleRequestStatus(vt *VTodo, prop componants.Property) error {
 		rs.Description = parts[1]
 	}
 	if len(parts) > 2 {
-		rs.Extra = utils.Ptr(parts[2])
+		rs.Extra = new(parts[2])
 	}
 	return vt.AddRequestStatus(rs)
 }

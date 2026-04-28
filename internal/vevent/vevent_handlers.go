@@ -188,7 +188,7 @@ func handleAttendee(ev *VEvent, prop componants.Property) error {
 }
 
 func handleCategories(ev *VEvent, prop componants.Property) error {
-	for _, cat := range strings.Split(prop.Value, ",") {
+	for cat := range strings.SplitSeq(prop.Value, ",") {
 		if cat = strings.TrimSpace(cat); cat != "" {
 			ev.AddCategory(cat)
 		}
@@ -227,7 +227,7 @@ func handleRequestStatus(ev *VEvent, prop componants.Property) error {
 		rs.Description = parts[1]
 	}
 	if len(parts) > 2 {
-		rs.Extra = utils.Ptr(parts[2])
+		rs.Extra = new(parts[2])
 	}
 	return ev.AddRequestStatus(rs)
 }

@@ -28,7 +28,7 @@ func (a *VAlarm) ProcessProperty(prop componants.Property) error {
 		if a.Action != nil {
 			return fmt.Errorf("%w: ACTION", utils.ErrDuplicateProperty)
 		}
-		a.Action = utils.Ptr(prop.Value)
+		a.Action = new(prop.Value)
 	case "TRIGGER":
 		if a.Trigger != nil {
 			return fmt.Errorf("%w: TRIGGER", utils.ErrDuplicateProperty)
@@ -37,17 +37,17 @@ func (a *VAlarm) ProcessProperty(prop componants.Property) error {
 		if err != nil {
 			return fmt.Errorf("invalid TRIGGER: %w", err)
 		}
-		a.Trigger = utils.Ptr(d)
+		a.Trigger = new(d)
 	case "DESCRIPTION":
 		if a.Description != nil {
 			return fmt.Errorf("%w: DESCRIPTION", utils.ErrDuplicateProperty)
 		}
-		a.Description = utils.Ptr(prop.Value)
+		a.Description = new(prop.Value)
 	case "SUMMARY":
 		if a.Summary != nil {
 			return fmt.Errorf("%w: SUMMARY", utils.ErrDuplicateProperty)
 		}
-		a.Summary = utils.Ptr(prop.Value)
+		a.Summary = new(prop.Value)
 	}
 	return nil
 }
