@@ -36,8 +36,7 @@ func WithCalScale(scale string) VcalendarOption {
 
 func WithEvent(ev *vevent.VEvent) VcalendarOption {
 	return func(cal *VCalendar) error {
-		cal.AddChild(ev)
-		return nil
+		return cal.AddChild(ev)
 	}
 }
 
@@ -49,6 +48,7 @@ func WithEvent(ev *vevent.VEvent) VcalendarOption {
 //	    ikalendar.WithProdID("-//MyApp//EN"),
 //	    ikalendar.WithEvent(ev),
 //	)
+
 func NewCalendar(opts ...VcalendarOption) (*VCalendar, error) {
 	cal := &VCalendar{
 		VERSION: "2.0",

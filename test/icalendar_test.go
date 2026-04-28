@@ -105,7 +105,7 @@ func TestMarshalCalendar(t *testing.T) {
 		ikalendar.WithSummary("Follow-up Meeting"),
 		ikalendar.WithLocation("My Home"),
 		ikalendar.WithStatus("TENTATIVE"),
-		ikalendar.WithDtStart(time.Now()),
+		ikalendar.WithDtStamp(time.Now()),
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -122,7 +122,6 @@ func TestMarshalCalendar(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	s := string(out)
 	if !strings.Contains(s, "SUMMARY:Follow-up Meeting") {
 		t.Fatal("missing SUMMARY")
@@ -147,7 +146,7 @@ func TestMarshalWithAlarm(t *testing.T) {
 
 	ev, err := ikalendar.NewEvent("uid-alarm-test",
 		ikalendar.WithSummary("Meeting with Alarm"),
-		ikalendar.WithDtStart(time.Now()),
+		ikalendar.WithDtStamp(time.Now()),
 		ikalendar.WithAlarm(alarm),
 	)
 	if err != nil {

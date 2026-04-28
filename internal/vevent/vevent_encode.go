@@ -80,6 +80,7 @@ func (ev *VEvent) Encode(ctx *componants.EncodeContext) {
 		encode.WriteRequestStatus(b, rs)
 	}
 
+	// fmt.Println("test")
 	// Sub-components
 	for i := range ev.VALARM {
 		ev.VALARM[i].Encode(ctx)

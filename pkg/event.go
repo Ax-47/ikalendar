@@ -15,6 +15,7 @@ var (
 	WithLocation      = vevent.WithLocation
 	WithStatus        = vevent.WithStatus
 	WithDtStart       = vevent.WithDtStart
+	WithDtStamp       = vevent.WithDtStamp
 	WithDtEnd         = vevent.WithDtEnd
 	WithDuration      = vevent.WithDuration
 	WithPriority      = vevent.WithPriority

@@ -77,6 +77,10 @@ func WithRRule(r share.RECUR) VeventOption {
 
 // ── Time ──────────────────────────────────────────────────────────────────────
 
+func WithDtStamp(t time.Time) VeventOption {
+	return func(ev *VEvent) error { return ev.SetDTSTAMP(share.NewITIME(t.UTC())) }
+}
+
 func WithDtStart(t time.Time) VeventOption {
 	return func(ev *VEvent) error { return ev.SetDTSTART(share.NewITIME(t.UTC())) }
 }

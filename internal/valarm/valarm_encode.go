@@ -9,7 +9,6 @@ func (a *VAlarm) Encode(ctx *componants.EncodeContext) {
 	b := ctx.Builder
 
 	encode.WriteProperty(b, "BEGIN", "VALARM")
-
 	encode.WriteString(b, "ACTION", a.Action)
 	if a.Trigger != nil {
 		encode.WriteString(b, "TRIGGER", new(a.Trigger.FormatDURATION()))

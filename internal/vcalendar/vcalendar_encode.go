@@ -13,7 +13,6 @@ func (cal *VCalendar) Encode(ctx *componants.EncodeContext) {
 	encode.WriteProperty(b, "PRODID", cal.PRODID)
 	encode.WriteString(b, "CALSCALE", cal.CALSCALE)
 	encode.WriteString(b, "METHOD", cal.METHOD)
-
 	for i := range cal.VEVENT {
 		cal.VEVENT[i].Encode(ctx)
 	}
