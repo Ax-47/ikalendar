@@ -15,8 +15,7 @@ type Parser struct {
 	scanner *bufio.Scanner
 	peek    string
 }
-type (
-	Engine struct {
-		registry componants.RegistryMap
-	}
-)
+
+type Engine struct {
+	registry componants.RegistryMap
+}
